@@ -1,0 +1,36 @@
+// Get the necessary DOM elements
+const taskInput = document.getElementById('taskInput');
+const addTaskButton = document.getElementById('addTaskButton');
+const taskList = document.getElementById('taskList');
+
+// Add a new task to the list
+function addTask() {
+  const taskText = taskInput.value.trim();
+  
+  if (taskText !== '') {
+    const taskItem = document.createElement('li');
+    const taskTextElement = document.createElement('span');
+    const deleteButton = document.createElement('button');
+    
+    taskTextElement.textContent = taskText;
+    deleteButton.textContent = 'Delete';
+    
+    deleteButton.addEventListener('click', deleteTask);
+    
+    taskItem.appendChild(taskTextElement);
+    taskItem.appendChild(deleteButton);
+    
+    taskList.appendChild(taskItem);
+    
+    taskInput.value = '';
+  }
+}
+
+// Delete a task from the list
+function deleteTask(event) {
+  const taskItem = event.target.parentNode;
+  taskList.removeChild(taskItem);
+}
+
+// Event listener for adding a task
+addTaskButton.addEventListener('click', addTask);
